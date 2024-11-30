@@ -141,8 +141,7 @@ ll factorial(ll n)
 {
  
   return (n == 1 || n == 0) ? 1 : ll(n) * factorial(n - 1);
-} 
-
+}
 
 int main() {
     ios_base::sync_with_stdio(false);
@@ -152,7 +151,30 @@ int main() {
     int f=1;
     // cin >> f;
     while (f--) {
-        
+        ll x,n;
+        cin>>x>>n;
+        set<ll> s;
+        multiset<ll, greater<ll> > s2;
+        s.insert(0);
+        s.insert(x);
+        s2.insert(x);
+        for(ll i=1; i<=n; i++){
+            ll p;
+            cin>>p;
+            // cout<<p<<" ";
+            ll up=*s.upper_bound(p);
+            ll down=*(--s.upper_bound(p));
+            s2.insert(up-p);
+            s2.insert(p-down);
+            s2.erase(s2.find(up-down));
+            s.insert(p);
+            // cout<<"s2: ";
+            // for(auto it=s2.begin(); it!=s2.end(); it++){
+            //     cout<<*it<<" ";
+            // }
+            // cout<<endl;
+            cout<<*s2.begin()<<" "<<endl;
+        }
     }
     return 0;
 }
